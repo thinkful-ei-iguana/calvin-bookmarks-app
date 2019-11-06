@@ -1,4 +1,4 @@
-import item from './item.js';
+import itemValidation from './itemValidation.js/index.js';
 
 
 

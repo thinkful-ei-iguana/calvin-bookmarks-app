@@ -1,4 +1,4 @@
-import item from './item.js';
+import itemValidation from './itemValidation.js';
 import store from './store.js';
 import index from './index.js';
 import api from './api.js';
@@ -25,3 +25,7 @@ function render() {
 
 
 
+export default {
+  render,
+  generateNewBm
+};

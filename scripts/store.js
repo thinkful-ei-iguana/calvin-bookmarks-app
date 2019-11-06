@@ -1,51 +1,59 @@
 import item from './item.js';
 
-const items = [];
-let hideCheckeditems = false;
 
-const findById = function (id) {
-  return this.items.find(currentItem => currentItem.id === id);
+
+//shows the unexpanded version of the store
+const store = {
+  bookmarks: [
+    {
+      id: 'x56w',
+      title: 'Title 1',
+      rating: 3,
+      url: 'http://www.title1.com',
+      description: 'lorem ipsum dolor sit',
+      expanded: false
+    },
+    {
+      id: '6ffw',
+      title: 'Title 2',
+      rating: 5,
+      url: 'http://www.title2.com',
+      description: 'dolorum tempore deserunt',
+      expanded: false
+    } 
+    ...
+  ],
+  adding: false,
+  error: null,
+  filter: 0
 };
 
-const addItem = function (name) {
-  try {
-    item.validateName(name);
-    this.items.push(item.create(name));
-  } catch (e) {
-    console.log(e.message);
-  }
+
+
+//shows the expanded: true form of the store
+const store = {
+  bookmarks: [
+    {
+      id: '7ddr',
+      title: 'Title 11',
+      rating: 5,
+      url: 'http://www.title11.com',
+      description: 'lorem ipsum dolor',
+      expanded: true
+    }
+    ...
+  ],
+  adding: false,
+  error: null,
+  filter: 0
 };
 
-const findAndToggleChecked = function (id) {
-  const currentItem = this.findById(id);
-  currentItem.checked = !currentItem.checked;
-};
 
-const findAndUpdateName = function (id, name) {
-  try {
-    item.validateName(name);
-    const currentItem = this.findById(id);
-    currentItem.name = name;
-  } catch (e) {
-    console.log('Cannot update name: ' + e.message);
-  }
-};
 
-const findAndDelete = function (id) {
-  this.items = this.items.filter(currentItem => currentItem.id !== id);
-};
-
-const toggleCheckedFilter = function () {
-  this.hideCheckedItems = !this.hideCheckedItems;
-};
-
-export default {
-  items,
-  hideCheckeditems,
-  findById,
-  addItem,
-  findAndToggleChecked,
-  findAndUpdateName,
-  findAndDelete,
-  toggleCheckedFilter
+//added is true, shows the 'adding' state form
+const store = {
+  bookmarks: [...],
+  adding: true,
+  error: null,
+  filter: 0
 };

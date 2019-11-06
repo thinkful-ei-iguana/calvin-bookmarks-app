@@ -1,54 +1,25 @@
-const validateName = function(name) {
-  if (!name) throw new TypeError('Name must not be blank');
+const validateTitle = function(title) {
+  if (!title) throw new TypeError('Title must not be blank');
 };
 
-const create = function(name) {
-  return {
-    id: cuid(),
-    name,
-    checked: false
-  };
+const validateDescription = function(description) {
+  if (!description) throw new TypeError('Description must not be blank');
 };
+
+const validateRating = function(title) {
+  if (!rating) throw new TypeError('Rating must not be blank');
+};
+
+const validateUrl = function(url) {
+  if (!url) throw new TypeError('Url link must not be blank');
+};
+
+
 
 export default {
-  validateName,
+  validateTitle,
+  validateDescription,
+  validateRating,
+  validateUrl,
   create
 };
-
-
-// document.getElementById('makeNewBookmark').addEventListener('click', (e) => {
-//   $('#hiddenForm').removeClass('hidden');
-// });
-
-// document.getElementById('hiddenForm').addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   let title = bookmarkTitle.value;
-//   let url = bookmarkUrl.value;
-//   let description = bookmarkDescription.value;
-//   let rating;
-//   Array.from(document.getElementsByClassName('bookmarkRating')).forEach((element,i) => {
-//     if(element.checked === true) {
-//       rating = i+1;
-//     }
-//   });
-//   displayStateParkResults(description, rating, title, url);
-//   console.log(rating);
-//   console.log(title);
-//   console.log(description);
-//   console.log(url);
-// });
-
-
-
-
-// function displayStateParkResults(description, rating, title, url) {
-//   $('.results2').append(`<div class="results2"> 
-//       <h2>${title}</h2>
-//       <div> ${rating}</div>
-//       <p>${description}</p>
-//       <a href=${url}>Go to the bookmark</a>
-//       </div>`);
-//   $('.results').removeClass('hidden');
-//   //display the results section
-//   $('.results2').removeClass('hidden');
-// }

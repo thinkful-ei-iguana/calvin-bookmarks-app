@@ -55,13 +55,25 @@ function generateNewBmFormHTML() {
 }
 
 
+
 //this generates the HTML portion for the render function to pull from the store
 function generateBookmarkHTML(bookmarkObject) {
   return `<h3>${bookmarkObject.title}</h3>
   <p>${bookmarkObject.description}</p>
-  <a href="${bookmarkObject.url}">Visit site</a>`;
-  <button>View</button>
+  <input id="expand" type="button" value="View">
+  <a href="${bookmarkObject.url}">Visit site</a>
+  `;
 }
+
+
+
+
+
+
+
+
+
+
 
 //to render updates to the DOM
 //displaying DOM based on properties in the store
@@ -112,10 +124,17 @@ function submit() {
 //should change the stores expand:true/false property to be the opposite of what it currently is
 //then should call render to destroy and re-render the page with the current store information
 function toggleExpand() {
-  $("#bigDiv").on('click', store.bookmarks.expanded = !store.bookmarks.expanded);
+  $("#expand").on('click', store.bookmarks.expanded = !store.bookmarks.expanded);
   render();
-  return 
+  // let expander = document.getElementById('expand');
+  // if (expander.addEventListener)
+  //   expander.addEventListener('click', toggleExpand, false);
+  // else if (expander.attachEvent)
+  //   expander.attachEvent('onclick', toggleExpand);
+  return; 
 }
+
+
 
 
 

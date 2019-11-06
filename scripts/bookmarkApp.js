@@ -67,14 +67,6 @@ function generateBookmarkHTML(bookmarkObject) {
 
 
 
-
-
-
-
-
-
-
-
 //to render updates to the DOM
 //displaying DOM based on properties in the store
 //this should be looking for different actions being taken in order to render them
@@ -124,7 +116,7 @@ function submit() {
 //should change the stores expand:true/false property to be the opposite of what it currently is
 //then should call render to destroy and re-render the page with the current store information
 function toggleExpand() {
-  $("#expand").on('click', store.bookmarks.expanded = !store.bookmarks.expanded);
+  $("#bigDiv").on('click', "#expand", store.bookmarks.expanded = !store.bookmarks.expanded);
   render();
   // let expander = document.getElementById('expand');
   // if (expander.addEventListener)

@@ -1,4 +1,4 @@
-import bookmark from './bookmarkApp';
+import bookmark from './bookmarkApp.js';
 
 
 

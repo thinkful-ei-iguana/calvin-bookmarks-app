@@ -1,8 +1,8 @@
-import bookmarks from './bookmarkApp';
+import bookmarkApp from './bookmarkApp.js';
 
 const main = function () {
-  shoppingList.bindEventListeners();
-  shoppingList.render();
+  bookmarkApp.bindEventListeners();
+  bookmarkApp.render();
 };
 
 $(main);

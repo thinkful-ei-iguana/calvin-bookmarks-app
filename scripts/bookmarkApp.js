@@ -1,7 +1,7 @@
 import item from './itemValidation.js';
 import store from './store.js';
 // import index from './index.js';
-//import api from './api.js';
+
 
 
 
@@ -34,15 +34,28 @@ function generateNewBmButtonHTML() {
 
 function generateMinRatingHTML() {
   return `<select> 
-  <option> min rating 1+</option>
-  <option> min rating 2+</option>
-  <option> min rating 3+</option>
-  <option> min rating 4+</option>
-  <option> min rating 5+</option>  
+  <option value="1"> min rating 1+</option>
+  <option value="2"> min rating 2+</option>
+  <option value="3"> min rating 3+</option>
+  <option value="4"> min rating 4+</option>
+  <option value="5"> min rating 5</option>  
   </select>`;
 }
 
-//finds an item based on its ID element
+
+
+//make this into a function, export, import at the 'ready event'
+// this should have an if loop that check if the store.bookmark.rating is >= what's been selected
+const rating = function () {
+  $('#bigDiv').on('change', 'select', function() {
+    let resRating = [];
+    let tempStore = store.js;
+    if(this>= tempStore.rating.val()) {
+      resRating.push (store.bookmark);
+    }
+  });
+};
+
 
 
 
@@ -51,9 +64,17 @@ function generateNewBmFormHTML() {
   <input required id="title" placeholder="Title here">
   <input required id="siteUrl" placeholder="Site url">
   <input required id="descr" placeholder="Description here">
+  <select>
+  <option value="1"> rate 1</option>
+  <option value="2"> rate 2</option>
+  <option value="3"> rate 3</option>
+  <option value="4"> rate 4</option>
+  <option value="5"> rate 5</option>  
+  </select>
   <input id="submit" type="submit" placeholder="Submit">
   </form>`;
 }
+
 
 
 //expanded = true or false, or 1/0, every time it's called it's value is flipped
@@ -65,83 +86,55 @@ function generateBookmarkHTML(bookmarkObject, index) {
   let tempDesc = bookmarkObject.description;
   let charLength = tempDesc.length;
   let preview = '';
-  let description = tempDesc;
-  //if loop wrapped around the if/else loop, checking whether a variable is 1 or 0, the variable should be 
-  //assigned in the inner if loop
+  // console.log(bookmarkObject);
+  const template = document.createElement('article');
+  const h3 = document.createElement('h3');
+  const aHref = document.createElement('a');
+  const paragraph = document.createElement('p');
+  const paragraph2 = document.createElement('p');
+
+
   if(charLength>25) {
-    preview = tempDesc.trim().slice(0, 25) + '...';
+    preview = bookmarkObject.description.trim().slice(0, 25) + '...';
+  } else {
+    preview = bookmarkObject.description;
   }
-  //const description = bookmarkObject.expanded? bookmarkObject.description: `${bookmarkObject.description.slice(0, 25)}` + '...';
-  //use trim in the description.slice
-  return `<h3>${bookmarkObject.title}</h3>
-  <p id="prev" class="show">${preview}</p>
-  <p id="desc" class="hidden">${description}</p>
-  <button id="${index}" class="view" value="view">test2</button>
-  <a href="http://${bookmarkObject.url}" target="_blank">Visit site</a>
-
-  
-  // <script>
-  // $('button').click(function() {
-  //   console.log(this);
-  //   let test3 = $('p');
-  //   console.log(test3);
-  //   <div class=“test”>${bookmarkObject.description}</div>
-  //   $(‘div.test’).click(
-  //     if(test3[0].className === 'show') {
-  //       test3[0].className = 'hidden';
-  //     } else {
-  //       test3[0].className = 'show';
-  //     }
-  //     )
-    
-
-  // });
-
-
-  // </script>
-  `;
+  h3.textContent = bookmarkObject.title;
+  paragraph.textContent = preview;
+  paragraph.classList.add("show");
+  paragraph.classList.add("show2");
+  paragraph2.textContent = bookmarkObject.description;
+  paragraph2.classList.add("hidden");
+  aHref.href = `http://${bookmarkObject.url}`;
+  aHref.target = '_blank';
+  aHref.textContent = 'Visit site';
+  paragraph.addEventListener('click', () => {
+    paragraph.classList.remove('show');
+    paragraph2.classList.remove('hidden');
+  });
+  paragraph2.addEventListener('click', () => {
+    paragraph.classList.add('show');
+    paragraph2.classList.add('hidden');
+  });
+  template.appendChild(h3);
+  template.appendChild(paragraph);
+  template.appendChild(paragraph2);
+  template.appendChild(aHref);
+  return template;
 }
 
-//div value by default is yes
-
-//if statement on the div/class/attr
-// this.('p')[0].className ="show" (if long desc is set to no) 
-// this.('p')[1].className ="hidden" (if long desc is set to no) 
-
-//nesting IF statements
-// this.('p')[1].className ="show" (if long desc is set to yes) 
-// this.('p')[0].className ="hidden" (if long desc is set to yes) 
-
-//set div value = no
 
 
 
 
 
-// if div attribute long===“no”
-//no is default
-//once selected its attr swaps to yes
-
-
-//if div’s long attribute set to no (meaning dont show long description) 
-// set the div’s preview p class to show and the div’s description p
-// classname (second p -> this.p[1].className) to hidden
-
-
-//have short vs long desc toggle by clicking on the bookmark itself
-// (this).
-
-
-
-//$(function(){$(‘a’).click(clickHandler);});
 
 
 
 
-// document.getElementsByTagName('input').on('click').value;
-// function test() {
-//   console.log(this);
-// }
+
+
+
 
 
 
@@ -161,6 +154,7 @@ const render = function () {
       if(siteUrlValue.includes('.com') && siteUrlValue.includes('www.')) {
         const bookmarkTitle = document.getElementById('title').value;
         const bookmarkDesc = document.getElementById('descr').value;
+        const bookmarkRating = document.getElementById('#bigDiv', 'rating').value;
         store.bookmarks.push({
           title: bookmarkTitle,
           url: siteUrlValue,
@@ -177,11 +171,9 @@ const render = function () {
   }
   for(let i=0;i<store.bookmarks.length; i++) {
     let bookmark = store.bookmarks[i];
-    divTag.append(generateBookmarkHTML(bookmark), i);
+    divTag.append(generateBookmarkHTML(bookmark, i));
   }
-  $(".view").on('click', (event) => {
-
-  });
+  
 };
 
 //event listener, which when triggered toggles store.adding to true
@@ -247,5 +239,6 @@ function bindEventListeners() {
 export default {
   render,
   generateNewBm,
-  bindEventListeners
+  bindEventListeners,
+  rating
 };

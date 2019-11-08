@@ -6,10 +6,3 @@ const main = function () {
 };
 
 $(main);
-
-// function test() {
-//   console.log(this);
-// }
-// export default {
-//   test
-// };

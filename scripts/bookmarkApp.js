@@ -61,7 +61,7 @@ function generateNewBmFormHTML() {
 
 
 //this generates the HTML portion for the render function to pull from the store
-function generateBookmarkHTML(bookmarkObject, index, expanded) {
+function generateBookmarkHTML(bookmarkObject, index) {
   let tempDesc = bookmarkObject.description;
   let charLength = tempDesc.length;
   let preview = '';
@@ -76,15 +76,72 @@ function generateBookmarkHTML(bookmarkObject, index, expanded) {
   return `<h3>${bookmarkObject.title}</h3>
   <p id="prev" class="show">${preview}</p>
   <p id="desc" class="hidden">${description}</p>
-  <input id="${index}" class="view" type="button" value="View" onClick="test();">
+  <button id="${index}" class="view" value="view">test2</button>
   <a href="http://${bookmarkObject.url}" target="_blank">Visit site</a>
+
+  
+  // <script>
+  // $('button').click(function() {
+  //   console.log(this);
+  //   let test3 = $('p');
+  //   console.log(test3);
+  //   <div class=“test”>${bookmarkObject.description}</div>
+  //   $(‘div.test’).click(
+  //     if(test3[0].className === 'show') {
+  //       test3[0].className = 'hidden';
+  //     } else {
+  //       test3[0].className = 'show';
+  //     }
+  //     )
+    
+
+  // });
+
+
+  // </script>
   `;
 }
 
-document.getElementsByTagName('input').on('click').value;
-function test() {
-  console.log(this);
-}
+//div value by default is yes
+
+//if statement on the div/class/attr
+// this.('p')[0].className ="show" (if long desc is set to no) 
+// this.('p')[1].className ="hidden" (if long desc is set to no) 
+
+//nesting IF statements
+// this.('p')[1].className ="show" (if long desc is set to yes) 
+// this.('p')[0].className ="hidden" (if long desc is set to yes) 
+
+//set div value = no
+
+
+
+
+
+// if div attribute long===“no”
+//no is default
+//once selected its attr swaps to yes
+
+
+//if div’s long attribute set to no (meaning dont show long description) 
+// set the div’s preview p class to show and the div’s description p
+// classname (second p -> this.p[1].className) to hidden
+
+
+//have short vs long desc toggle by clicking on the bookmark itself
+// (this).
+
+
+
+//$(function(){$(‘a’).click(clickHandler);});
+
+
+
+
+// document.getElementsByTagName('input').on('click').value;
+// function test() {
+//   console.log(this);
+// }
 
 
 

@@ -6,7 +6,6 @@ import item from './itemValidation.js';
 const store = {
   bookmarks: [
     {
-      id: 'x56w',
       title: 'Google',
       rating: 5,
       url: 'http://www.google.com',
@@ -14,7 +13,6 @@ const store = {
       expanded: false
     },
     {
-      id: '6ffw',
       title: 'Bing',
       rating: 1,
       url: 'http://www.bing.com',
